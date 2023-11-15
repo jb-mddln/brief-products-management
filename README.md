@@ -1,8 +1,5 @@
 # Exercice de conception d'une application de gestion de produits
-* Gestion d'une base de donnée de manière simpliste avec PostgreSQL et Npgsql (Connexion, requêtes CRUD)
-* Toutes les requêtes du brief sont dans le dossier sql du repo
- 
-### Contexte du projet
+## Contexte du projet
 Créez une application pour gérer un produit et sa catégorie. Définissez quelles informations intégrer pour chaque produit et catégorie (par exemple : nom, prix, quantité en stock, etc ...). L'application doit permettre de créer, visualiser, modifier et supprimer un produit et une catégorie.
 Le projet doit comporter trois éléments :
 * Une base de données
