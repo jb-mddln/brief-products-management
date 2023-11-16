@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FormAddNew from "./FormAddNew";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { getProducts } from "../services/ProductService";
+import { Product } from "../models/Product";
 
 const PageContent: React.FC = () => {
   let { type } = useParams<{ type: string }>();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [searchValue, setSearchValue] = useState<string | null>(null);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get("s");
+    setSearchValue(searchQuery || null);
+  }, [location.search]);
+
+  useEffect(() => {
+    if (type === "products") {
+      if (products.length === 0) {
+        getProducts()
+          .then((response) => {
+            setProducts(response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching products:", error);
+          });
+      }
+    }
+  }, [type]);
 
   const renderTable = () => {
+    const src = searchValue
+      ? products.filter((product) =>
+          product.name.toLowerCase().includes(searchValue.toLowerCase())
+        )
+      : products;
     return (
       <table>
         <thead>
@@ -25,50 +54,25 @@ const PageContent: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {type === "products" ? (
-            <>
-              <tr>
-                <td>1</td>
-                <td>Produit 1</td>
-                <td>Description du produit 1</td>
-                <td>Image du produit 1</td>
-                <td>10</td>
-                <td>19.99</td>
-                <td>
-                  <FaEye color="blue" />
-                  <FaEdit color="green" />
-                  <FaTrash color="red" />
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Produit 2</td>
-                <td>Description du produit 2</td>
-                <td>Image du produit 2</td>
-                <td>40</td>
-                <td>39.99</td>
-                <td>
-                  <FaEye color="blue" />
-                  <FaEdit color="green" />
-                  <FaTrash color="red" />
-                </td>
-              </tr>
-            </>
-          ) : (
-            <>
-              <tr>
-                <td>1</td>
-                <td>Catégorie 1</td>
-                <td>Description de la catégorie 1</td>
-                <td>Image de la catégorie 1</td>
-                <td>
-                  <FaEye color="blue" />
-                  <FaEdit color="green" />
-                  <FaTrash color="red" />
-                </td>
-              </tr>
-            </>
-          )}
+          {src.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.description}</td>
+              <td>{product.image}</td>
+              {type === "products" && (
+                <>
+                  <td>{product.stock}</td>
+                  <td>{product.price}</td>
+                </>
+              )}
+              <td>
+                <FaEye color="blue" />
+                <FaEdit color="green" />
+                <FaTrash color="red" />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     );
@@ -83,7 +87,7 @@ const PageContent: React.FC = () => {
           : "Accueil"}
       </h1>
       <div>{/* <FormAddNew type={type} /> */}</div>
-      {renderTable()}
+      {type === "products" || type === "categories" ? renderTable() : null}
     </div>
   );
 };

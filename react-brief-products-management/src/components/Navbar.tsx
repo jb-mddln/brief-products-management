@@ -1,15 +1,29 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-interface NavbarProps {}
-
-const Navbar: React.FC<NavbarProps> = () => {
+const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = event.target.value;
+    const path = location.pathname;
+    const query = searchValue !== "" ? `?s=${searchValue}` : "";
+
+    navigate(path);
+
+    if (path.includes("/list/products")) {
+      navigate(`/list/products${query}`);
+    } else if (path.includes("/list/categories")) {
+      navigate(`/list/categories${query}`);
+    }
+  };
+
   const placeholderText = location.pathname.includes("/list/products")
     ? "Rechercher un produit"
     : location.pathname.includes("/list/categories")
     ? "Rechercher une catégorie"
-    : "Recherche un produit ou une catégorie";
+    : "Rechercher un produit ou une catégorie";
 
   return (
     <nav>
@@ -24,7 +38,15 @@ const Navbar: React.FC<NavbarProps> = () => {
           <Link to="/list/categories">Liste des catégories</Link>
         </li>
       </ul>
-      <input type="text" placeholder={placeholderText} style={{ width: `${placeholderText.length}ch`}} />
+      {(location.pathname.includes("/list/products") ||
+        location.pathname.includes("/list/categories")) && (
+        <input
+          type="text"
+          placeholder={placeholderText}
+          style={{ width: `${placeholderText.length}ch` }}
+          onChange={handleSearch}
+        />
+      )}
     </nav>
   );
 };
