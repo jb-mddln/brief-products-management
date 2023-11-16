@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [searchInputText, setSearchInputText] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = event.target.value;
+    const inputText = event.target.value;
+    setSearchInputText(inputText);
     const path = location.pathname;
-    const query = searchValue !== "" ? `?s=${searchValue}` : "";
+    const query = inputText !== "" ? `?s=${inputText}` : "";
 
     navigate(path);
 
@@ -32,16 +34,21 @@ const Navbar: React.FC = () => {
           <Link to="/">Accueil</Link>
         </li>
         <li>
-          <Link to="/list/products">Liste des produits</Link>
+          <Link onClick={() => setSearchInputText("")} to="/list/products">
+            Liste des produits
+          </Link>
         </li>
         <li>
-          <Link to="/list/categories">Liste des catégories</Link>
+          <Link onClick={() => setSearchInputText("")} to="/list/categories">
+            Liste des catégories
+          </Link>
         </li>
       </ul>
       {(location.pathname.includes("/list/products") ||
         location.pathname.includes("/list/categories")) && (
         <input
           type="text"
+          value={searchInputText}
           placeholder={placeholderText}
           style={{ width: `${placeholderText.length}ch` }}
           onChange={handleSearch}
