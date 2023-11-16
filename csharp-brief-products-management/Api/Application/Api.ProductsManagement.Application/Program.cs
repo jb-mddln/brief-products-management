@@ -29,25 +29,11 @@ namespace Api.ProductsManagement.Application
 
             builder.Services.AddAutoMapper(Assembly.Load("Api.ProductsManagement.Service.Mapper"));
 
-            /* builder.Services.AddAutoMapper(typeof(ProductMapper).Assembly, typeof(CategoryMapper).Assembly);
-            builder.Services.AddSingleton(provider => new MapperConfiguration(config =>
-            {
-                config.ConstructServicesUsing(provider.GetService);
-            }));
-            builder.Services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<MapperConfiguration>(), sp.GetService));
-            */
-
-
             builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
             builder.Services.AddScoped<IRepository<ProductsCategory>, ProductsCategoryRepository>();
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
-
-            builder.Services.AddControllers();
-
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
             builder.Services.AddCors(options =>
             {
@@ -59,6 +45,11 @@ namespace Api.ProductsManagement.Application
                 });
             });
 
+            builder.Services.AddControllers();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -68,6 +59,8 @@ namespace Api.ProductsManagement.Application
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 
