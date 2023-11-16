@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.ProductsManagement.Data.Context.Contract\Api.ProductsManagement.Data.Context.Contract.csproj" />
+    <ProjectReference Include="..\Api.ProductsManagement.Data.Entity\Api.ProductsManagement.Data.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
