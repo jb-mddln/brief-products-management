@@ -12,5 +12,7 @@ export const getProduct = (productId: number) => {
 };
 
 export const deleteProduct = (productId: number) => {
-  return axios.delete(`${import.meta.env.VITE_API_BASE_URL}/products/${productId}`);
+  return axios.delete(
+    `${import.meta.env.VITE_API_BASE_URL}/products/${productId}`
+  );
 };
