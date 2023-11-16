@@ -1,8 +1,8 @@
 -- postgreSQL pgAdmin4
-DROP DATABASE IF EXISTS "online_shop";
+DROP DATABASE IF EXISTS "products_management";
 
--- Créez une base de données nommée "online_shop".
-CREATE DATABASE "online_shop" ENCODING "UTF8";
+-- Créez une base de données nommée "products_management".
+CREATE DATABASE "products_management" ENCODING "UTF8";
 
 -- Réinitialisation auto-incrémentation si tables déjà existante
 DO $$
