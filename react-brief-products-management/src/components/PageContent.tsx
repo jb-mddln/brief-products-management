@@ -4,10 +4,13 @@ import FormAddNew from "./FormAddNew";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { getProducts } from "../services/ProductService";
 import { Product } from "../models/Product";
+import { Category } from "../models/Category";
+import { getCategories } from "../services/CategoryService";
 
 const PageContent: React.FC = () => {
   let { type } = useParams<{ type: string }>();
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [searchValue, setSearchValue] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,18 +27,30 @@ const PageContent: React.FC = () => {
             setProducts(response.data);
           })
           .catch((error) => {
-            console.error("Error fetching products:", error);
+            console.error("Error while fetching products:", error);
+          });
+      }
+    } else if (type === "categories") {
+      if (categories.length === 0) {
+        getCategories()
+          .then((response) => {
+            setCategories(response.data);
+          })
+          .catch((error) => {
+            console.error("Error while fetching categories:", error);
           });
       }
     }
   }, [type]);
 
   const renderTable = () => {
+    const tableData: (Product | Category)[] =
+      type === "products" ? products : categories;
     const src = searchValue
-      ? products.filter((product) =>
-          product.name.toLowerCase().includes(searchValue.toLowerCase())
+      ? tableData.filter((data) =>
+          data.name.toLowerCase().includes(searchValue.toLowerCase())
         )
-      : products;
+      : tableData;
     return (
       <table>
         <thead>
@@ -54,16 +69,16 @@ const PageContent: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {src.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.description}</td>
-              <td>{product.image}</td>
-              {type === "products" && (
+          {src.map((data) => (
+            <tr key={data.id}>
+              <td>{data.id}</td>
+              <td>{data.name}</td>
+              <td>{data.description}</td>
+              <td>{data.image}</td>
+              {"stock" in data && "price" in data && (
                 <>
-                  <td>{product.stock}</td>
-                  <td>{product.price}</td>
+                  <td>{(data as Product).stock}</td>
+                  <td>{(data as Product).price}</td>
                 </>
               )}
               <td>
