@@ -32,7 +32,7 @@ namespace Api.ProductsManagement.Data.Context
                     .HasMaxLength(100)
                     .HasColumnName("description");
                 entity.Property(e => e.Image)
-                    .HasMaxLength(50)
+                    .HasColumnType("bytea")
                     .HasColumnName("image");
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -73,7 +73,7 @@ namespace Api.ProductsManagement.Data.Context
                     .HasMaxLength(100)
                     .HasColumnName("description");
                 entity.Property(e => e.Image)
-                    .HasMaxLength(50)
+                    .HasColumnType("bytea")
                     .HasColumnName("image");
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)

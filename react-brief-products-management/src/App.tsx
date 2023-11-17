@@ -1,4 +1,5 @@
 import "./assets/App.css";
+import CategoryDetail from "./components/CategoryDetail";
 import Navbar from "./components/Navbar";
 import PageContent from "./components/PageContent";
 import ProductDetail from "./components/ProductDetail";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<PageContent />} />
         <Route path="/list/:type" element={<PageContent />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/categories/:id" element={<CategoryDetail />} />
       </Routes>
     </Router>
   );

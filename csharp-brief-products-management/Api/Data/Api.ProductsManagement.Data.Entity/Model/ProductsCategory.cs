@@ -11,7 +11,7 @@ public class ProductsCategory
 
     public string? Description { get; set; }
 
-    public string? Image { get; set; }
+    public byte[]? Image { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

@@ -24,6 +24,17 @@ namespace Api.ProductsManagement.Service
             return _mapper.Map<IEnumerable<ReadCategoryDTO>>(categories);
         }
 
+        public async Task<ReadCategoryDTO> GetCategoryByIdAsync(int id)
+        {
+            var category = await _productsCategoryRepository.GetById(id, category => category.Products).ConfigureAwait(false);
+            if (category == null)
+            {
+                throw new Exception($"Category {id} not found.");
+            }
+
+            return _mapper.Map<ReadCategoryDTO>(category);
+        }
+
         public async Task<IEnumerable<ReadCategoryDTO>> GetCategoriesByIds(IEnumerable<int> ids)
         {
             var categories = await _productsCategoryRepository.GetByIds(ids).ConfigureAwait(false);

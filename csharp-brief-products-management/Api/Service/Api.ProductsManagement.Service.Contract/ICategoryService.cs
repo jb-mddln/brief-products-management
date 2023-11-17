@@ -6,6 +6,8 @@ namespace Api.ProductsManagement.Service.Contract
     {
         Task<IEnumerable<ReadCategoryDTO>> GetCategoriesAsync();
 
+        Task<ReadCategoryDTO> GetCategoryByIdAsync(int id);
+
         Task<IEnumerable<ReadCategoryDTO>> GetCategoriesByIds(IEnumerable<int> ids);
     }
 }

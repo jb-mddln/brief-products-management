@@ -11,7 +11,7 @@ namespace Api.ProductsManagement.Data.Entity.Model
 
         public string? Description { get; set; }
 
-        public string? Image { get; set; }
+        public byte[]? Image { get; set; }
 
         public decimal Price { get; set; }
 

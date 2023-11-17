@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FormAddNew from "./FormAddNew";
-import { FaEdit, FaEye, FaTrash, FaSave } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash, FaSave, FaPlusCircle } from "react-icons/fa";
 import { getProducts } from "../services/ProductService";
 import { Product } from "../models/Product";
 import { Category } from "../models/Category";
@@ -73,7 +73,7 @@ const PageContent: React.FC = () => {
         )
       : tableData;
     return (
-      <table>
+      <table className="table round-corners">
         <thead>
           <tr>
             <th>Id</th>
@@ -101,11 +101,11 @@ const PageContent: React.FC = () => {
                 )}
               </td>
               <td>{data.description}</td>
-              <td>{data.image}</td>
+              <td><img src={`data:image/png;base64,${data.image}`} alt={data.name}></img></td>
               {"stock" in data && "price" in data && (
                 <>
                   <td>{(data as Product).stock}</td>
-                  <td>{(data as Product).price}</td>
+                  <td>{(data as Product).price} €</td>
                 </>
               )}
               <td>
@@ -148,6 +148,8 @@ const PageContent: React.FC = () => {
             : "Liste des catégories"
           : "Accueil"}
       </h1>
+      <div style={{padding: "5px"}}><button><span><FaPlusCircle style={{ marginRight: "5px" }} />Ajouter {type === "products" ? "un produit" : "une catégorie"}</span></button></div>
+
       <div>{/* <FormAddNew type={type} /> */}</div>
       {type === "products" || type === "categories" ? renderTable() : null}
     </div>

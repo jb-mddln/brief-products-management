@@ -7,7 +7,7 @@ export const getCategories = () => {
   );
 };
 
-export const getCategory = (categoryId: number) => {
+export const getCategory = (categoryId: string) => {
   return axios.get<Category>(
     `${import.meta.env.VITE_API_BASE_URL}/categories/${categoryId}`
   );

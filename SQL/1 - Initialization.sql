@@ -33,7 +33,7 @@ CREATE TABLE products
    Id SERIAL PRIMARY KEY,
    Name VARCHAR(50) NOT NULL,
    Description VARCHAR(100),
-   Image VARCHAR(50),
+   Image BYTEA,
    Price DECIMAL(15,2) NOT NULL,
    Stock INT NOT NULL
 );
@@ -43,7 +43,7 @@ CREATE TABLE products_categories
    Id SERIAL PRIMARY KEY,
    Name VARCHAR(50) NOT NULL,
    Description VARCHAR(100),
-   Image VARCHAR(50)
+   Image BYTEA
 );
 
 CREATE TABLE products_categories_association
