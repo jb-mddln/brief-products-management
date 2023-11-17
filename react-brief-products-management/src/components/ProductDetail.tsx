@@ -2,13 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../models/Product";
 import { getProduct } from "../services/ProductService";
-import {
-  FaEdit,
-  FaArrowLeft,
-  FaTrash,
-  FaSave,
-  FaPlusCircle,
-} from "react-icons/fa";
+import { FaArrowLeft, FaTrash } from "react-icons/fa";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

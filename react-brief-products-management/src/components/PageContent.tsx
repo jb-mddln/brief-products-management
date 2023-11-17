@@ -101,7 +101,12 @@ const PageContent: React.FC = () => {
                 )}
               </td>
               <td>{data.description}</td>
-              <td><img src={`data:image/png;base64,${data.image}`} alt={data.name}></img></td>
+              <td>
+                <img
+                  src={`data:image/png;base64,${data.image}`}
+                  alt={data.name}
+                ></img>
+              </td>
               {"stock" in data && "price" in data && (
                 <>
                   <td>{(data as Product).stock}</td>
@@ -148,8 +153,16 @@ const PageContent: React.FC = () => {
             : "Liste des catégories"
           : "Accueil"}
       </h1>
-      <div style={{padding: "5px"}}><button><span><FaPlusCircle style={{ marginRight: "5px" }} />Ajouter {type === "products" ? "un produit" : "une catégorie"}</span></button></div>
-
+      {type === "products" || type === "categories" ? (
+        <div style={{ padding: "5px" }}>
+          <button>
+            <span>
+              <FaPlusCircle style={{ marginRight: "5px" }} />
+              Ajouter {type === "products" ? "un produit" : "une catégorie"}
+            </span>
+          </button>
+        </div>
+      ) : null}
       <div>{/* <FormAddNew type={type} /> */}</div>
       {type === "products" || type === "categories" ? renderTable() : null}
     </div>
