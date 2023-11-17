@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fjalla+One');
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One");
 
 :root {
   --txt-color: #010204;
-  --bg-color: #E1E6F9;
-  --primary-color: #7F94E6;
-  --secondary-color: #AAB7EE;
-  --accent-color: #223DAA;
+  --bg-color: #e1e6f9;
+  --primary-color: #7f94e6;
+  --secondary-color: #aab7ee;
+  --accent-color: #223daa;
   --border-radius: 1.5rem;
 }
 
@@ -15,7 +15,7 @@ body {
   background-color: var(--bg-color);
   color: var(--txt-color);
   font-size: smaller;
-  font-family: 'Fjalla One', sans-serif;
+  font-family: "Fjalla One", sans-serif;
 }
 
 nav {
@@ -102,18 +102,18 @@ table thead tr {
 }
 
 table tr {
-  padding: .35em;
+  padding: 0.35em;
 }
 
 table th,
 table td {
-  padding: .625em;
+  padding: 0.625em;
   text-align: center;
 }
 
 table th {
-  font-size: .85em;
-  letter-spacing: .1em;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -131,7 +131,7 @@ table tbody tr:nth-child(odd) {
 }
 
 table svg {
-  padding: .625em;
+  padding: 0.625em;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -145,14 +145,16 @@ table.round-corners {
   border-spacing: 1px;
 }
 
-table.round-corners th, table.round-corners td {
+table.round-corners th,
+table.round-corners td {
   padding: 15px;
   text-align: center;
   border: 0;
   box-shadow: 0 0 0 1px var(--bg-color);
 }
 
-.table.round-corners tbody tr:hover th, .table.round-corners tbody tr:hover td {
+.table.round-corners tbody tr:hover th,
+.table.round-corners tbody tr:hover td {
   background: #96acff;
   transition: background 1.3s ease;
 }
@@ -189,8 +191,8 @@ table.round-corners th, table.round-corners td {
   border-bottom-right-radius: 10px;
 }
 
-button {
-  font-family: 'Fjalla One', sans-serif;
+.button {
+  font-family: "Fjalla One", sans-serif;
   border: 0;
   background-color: var(--primary-color);
   color: var(--bg-color);
@@ -198,20 +200,22 @@ button {
   padding: 0.8em 1.2em 0.8em 1em;
   transition: all ease-in 0.2s;
   cursor: pointer;
+  width: 150px;
+  float: right;
+  margin-bottom: 0.8em;
 }
 
-button span {
+.button span {
   display: flex;
   justify-content: center;
   align-items: center;
-  
- }
- 
- button:hover {
-  box-shadow: 0 0 0 2px var(--accent-color);
- }
+}
 
- .card {
+.button:hover {
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+.card {
   --main-color: #000;
   --bg-color: #fff;
   position: relative;
@@ -224,7 +228,8 @@ button span {
   gap: 10px;
 }
 
-.card-back svg, .card-menu svg {
+.card-back svg,
+.card-menu svg {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -246,7 +251,7 @@ button span {
 .card-img {
   width: 170px;
   height: 170px;
-  background: linear-gradient(90deg, #FFF8F7, #F0F7DF);
+  background: linear-gradient(90deg, #fff8f7, #f0f7df);
   border-radius: 100%;
   margin-inline: auto;
 }
@@ -276,11 +281,94 @@ button span {
   align-items: center;
   gap: 15px;
   padding: 5px;
-  background: #F7F7F7;
+  background: #f7f7f7;
   border-radius: 50px;
 }
 
 .card-stock-txt {
   font-weight: 700;
   font-size: 22px;
+}
+
+.details-modal {
+  background: #ffffff;
+  border-radius: 0.5em;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  left: 50%;
+  max-width: 90%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30em;
+  text-align: left;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-modal .details-modal-close {
+  align-items: center;
+  display: flex;
+  height: 4.5em;
+  justify-content: center;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4.5em;
+}
+
+.details-modal .details-modal-close svg {
+  display: block;
+}
+
+.details-modal .details-modal-title {
+  color: #111827;
+  padding: 1.5em 2em;
+  pointer-events: all;
+  position: relative;
+  width: calc(100% - 4.5em);
+}
+
+.details-modal .details-modal-title h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.details-modal .details-modal-content {
+  border-top: 1px solid #e0e0e0;
+  padding: 2em;
+  pointer-events: all;
+  overflow: auto;
+}
+
+.details-modal-overlay {
+  transition: opacity 0.2s ease-out;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.8);
+  position: fixed;
+  opacity: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+details[open] .details-modal-overlay {
+  pointer-events: all;
+  opacity: 0.5;
+}
+
+details summary {
+  list-style: none;
+}
+
+details summary:focus {
+  outline: none;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
 }

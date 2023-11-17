@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FormAddNew from "./FormAddNew";
-import { FaEdit, FaEye, FaTrash, FaSave, FaPlusCircle } from "react-icons/fa";
+import {
+  FaEdit,
+  FaEye,
+  FaTrash,
+  FaSave,
+  FaPlusCircle,
+  FaTimes,
+} from "react-icons/fa";
 import { getProducts } from "../services/ProductService";
 import { Product } from "../models/Product";
 import { Category } from "../models/Category";
@@ -14,6 +21,7 @@ const PageContent: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [searchValue, setSearchValue] = useState<string | null>(null);
   const [editableRow, setEditableRow] = useState<number | null>(null);
+  const [isModalOpened, setModalOpen] = useState(false);
 
   const isRowEditable = (id: number) => editableRow === id;
 
@@ -62,6 +70,13 @@ const PageContent: React.FC = () => {
       }
       setEditableRow(id);
     }
+  };
+
+  const onModalToggle = (
+    event: React.MouseEvent<HTMLDetailsElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    setModalOpen(!isModalOpened);
   };
 
   const renderTable = () => {
@@ -153,17 +168,29 @@ const PageContent: React.FC = () => {
             : "Liste des catégories"
           : "Accueil"}
       </h1>
-      {type === "products" || type === "categories" ? (
-        <div style={{ padding: "5px" }}>
-          <button>
-            <span>
-              <FaPlusCircle style={{ marginRight: "5px" }} />
-              Ajouter {type === "products" ? "un produit" : "une catégorie"}
-            </span>
-          </button>
+      <details open={isModalOpened} onClick={onModalToggle}>
+        <summary>
+          {type === "products" || type === "categories" ? (
+            <div className="button">
+              <span>
+                <FaPlusCircle style={{ marginRight: "5px" }} />
+                Ajouter {type === "products" ? "un produit" : "une catégorie"}
+              </span>
+            </div>
+          ) : null}
+          <div className="details-modal-overlay"></div>
+        </summary>
+        <div className="details-modal">
+          <div className="details-modal-close">
+            <FaTimes />
+          </div>
+          <div className="details-modal-title">
+            <h1>Ajouter {type === "products" ? "un produit" : "une catégorie"}</h1>
+          </div>
+          <div className="details-modal-content">
+          </div>
         </div>
-      ) : null}
-      <div>{/* <FormAddNew type={type} /> */}</div>
+      </details>
       {type === "products" || type === "categories" ? renderTable() : null}
     </div>
   );
