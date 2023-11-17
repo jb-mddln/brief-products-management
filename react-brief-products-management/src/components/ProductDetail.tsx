@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "../models/Product";
 import { getProduct } from "../services/ProductService";
@@ -7,6 +7,7 @@ import { FaArrowLeft, FaTrash } from "react-icons/fa";
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -29,7 +30,7 @@ const ProductDetail: React.FC = () => {
           <div className="card">
             <div className="card-wrapper">
               <div className="card-back">
-                <FaArrowLeft />
+                <FaArrowLeft onClick={() => navigate(-1)} />
               </div>
               <div className="card-menu">
                 <FaTrash color="red" />
