@@ -7,5 +7,9 @@ namespace Api.ProductsManagement.Service.Contract
         Task<IEnumerable<ReadProductDTO>> GetProductsAsync();
 
         Task<ReadProductDTO> GetProductByIdAsync(int id);
+
+        Task<ReadProductDTO> AddProductAsync(CreateProductDTO productDTO);
+
+        Task<ReadProductDTO> RemoveProductAsync(int id);
     }
 }

@@ -34,5 +34,30 @@ namespace Api.ProductsManagement.Service
 
             return _mapper.Map<ReadProductDTO>(product);
         }
+
+        public async Task<ReadProductDTO> AddProductAsync(CreateProductDTO productDTO)
+        {
+            if (productDTO == null)
+            {
+                throw new ArgumentNullException(nameof(productDTO));
+            }
+
+            var productToAdd = _mapper.Map<Product>(productDTO);
+            var productAdded = await _productRepository.Add(productToAdd).ConfigureAwait(false);
+
+            return _mapper.Map<ReadProductDTO>(productAdded);
+        }
+
+        public async Task<ReadProductDTO> RemoveProductAsync(int id)
+        {
+            var product = await _productRepository.GetById(id).ConfigureAwait(false);
+            if (product == null)
+            {
+                throw new Exception($"Product {id} not found.");
+            }
+
+            var productDeleted = await _productRepository.Remove(product).ConfigureAwait(false);
+            return _mapper.Map<ReadProductDTO>(productDeleted);
+        }
     }
 }
