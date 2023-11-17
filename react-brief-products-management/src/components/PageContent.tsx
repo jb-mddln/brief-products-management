@@ -13,10 +13,9 @@ const PageContent: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [searchValue, setSearchValue] = useState<string | null>(null);
-  const [editableRows, setEditableRows] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-  const isRowEditable = (id: number) => editableRows[id] || false;
+  const [editableRow, setEditableRow] = useState<number | null>(null);
+
+  const isRowEditable = (id: number) => editableRow === id;
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -49,10 +48,20 @@ const PageContent: React.FC = () => {
   }, [type]);
 
   const toggleEditMode = (id: number) => {
-    setEditableRows((prevEditableRows) => ({
-      ...prevEditableRows,
-      [id]: !prevEditableRows[id],
-    }));
+    if (isRowEditable(id)) {
+      // todo save edit
+      setEditableRow(null);
+    } else {
+      if (editableRow !== null) {
+        const confirmMessage = window.confirm(
+          "Vous avez des changements non sauvegardés. Voulez-vous continuer?"
+        );
+        if (!confirmMessage) {
+          return;
+        }
+      }
+      setEditableRow(id);
+    }
   };
 
   const renderTable = () => {
