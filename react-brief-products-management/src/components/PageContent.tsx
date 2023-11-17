@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FormAddNew from "./FormAddNew";
-import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash, FaSave } from "react-icons/fa";
 import { getProducts } from "../services/ProductService";
 import { Product } from "../models/Product";
 import { Category } from "../models/Category";
 import { getCategories } from "../services/CategoryService";
+import { Link } from "react-router-dom";
 
 const PageContent: React.FC = () => {
   let { type } = useParams<{ type: string }>();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [searchValue, setSearchValue] = useState<string | null>(null);
+  const [editableRows, setEditableRows] = useState<{ [key: number]: boolean }>(
+    {}
+  );
+  const isRowEditable = (id: number) => editableRows[id] || false;
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -43,6 +48,13 @@ const PageContent: React.FC = () => {
     }
   }, [type]);
 
+  const toggleEditMode = (id: number) => {
+    setEditableRows((prevEditableRows) => ({
+      ...prevEditableRows,
+      [id]: !prevEditableRows[id],
+    }));
+  };
+
   const renderTable = () => {
     const tableData: (Product | Category)[] =
       type === "products" ? products : categories;
@@ -72,7 +84,13 @@ const PageContent: React.FC = () => {
           {src.map((data) => (
             <tr key={data.id}>
               <td>{data.id}</td>
-              <td>{data.name}</td>
+              <td>
+                {isRowEditable(data.id) ? (
+                  <input type="text" value={data.name} />
+                ) : (
+                  data.name
+                )}
+              </td>
               <td>{data.description}</td>
               <td>{data.image}</td>
               {"stock" in data && "price" in data && (
@@ -82,8 +100,28 @@ const PageContent: React.FC = () => {
                 </>
               )}
               <td>
-                <FaEye color="blue" />
-                <FaEdit color="green" />
+                <Link
+                  to={`/${type === "products" ? "products" : "categories"}/${
+                    data.id
+                  }`}
+                >
+                  <FaEye color="blue" />
+                </Link>
+                {isRowEditable(data.id) ? (
+                  <>
+                    <FaSave
+                      color="green"
+                      onClick={() => toggleEditMode(data.id)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <FaEdit
+                      color="green"
+                      onClick={() => toggleEditMode(data.id)}
+                    />
+                  </>
+                )}
                 <FaTrash color="red" />
               </td>
             </tr>

@@ -5,7 +5,7 @@ export const getProducts = () => {
   return axios.get<Product[]>(`${import.meta.env.VITE_API_BASE_URL}/products`);
 };
 
-export const getProduct = (productId: number) => {
+export const getProduct = (productId: string) => {
   return axios.get<Product>(
     `${import.meta.env.VITE_API_BASE_URL}/products/${productId}`
   );

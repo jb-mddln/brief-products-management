@@ -23,5 +23,16 @@ namespace Api.ProductsManagement.Service
             var products = await _productRepository.GetAll(product => product.Categories).ConfigureAwait(false);
             return _mapper.Map<IEnumerable<ReadProductDTO>>(products);
         }
+
+        public async Task<ReadProductDTO> GetProductByIdAsync(int id)
+        {
+            var product = await _productRepository.GetById(id, product => product.Categories).ConfigureAwait(false);
+            if (product == null)
+            {
+                throw new Exception($"Product {id} not found.");
+            }
+
+            return _mapper.Map<ReadProductDTO>(product);
+        }
     }
 }

@@ -15,10 +15,18 @@ namespace Api.ProductsManagement.Application.Controllers
         }
 
         /// <summary>
-        /// Handle get request for retrieving all the products
+        /// Handle GET request for retrieving all the products
         /// </summary>
         /// <returns></returns>
         [HttpGet, ProducesResponseType(typeof(IEnumerable<ReadProductDTO>), 200)]
         public async Task<ActionResult> GetProductsAsync() => Ok(await _productService.GetProductsAsync());
+
+        /// <summary>
+        /// Handle the GET request with parameters to retrieve a product by its Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}"), ProducesResponseType(typeof(ReadProductDTO), 200)]
+        public async Task<ActionResult> GetProduct(int id) => Ok(await _productService.GetProductByIdAsync(id));
     }
 }
