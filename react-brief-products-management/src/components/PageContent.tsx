@@ -185,9 +185,15 @@ const PageContent: React.FC = () => {
             <FaTimes />
           </div>
           <div className="details-modal-title">
-            <h1>Ajouter {type === "products" ? "un produit" : "une catégorie"}</h1>
+            <h1 onClick={(e) => e.stopPropagation()}>
+              Ajouter {type === "products" ? "un produit" : "une catégorie"}
+            </h1>
           </div>
-          <div className="details-modal-content">
+          <div
+            className="details-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FormAddNew type={type} />
           </div>
         </div>
       </details>
