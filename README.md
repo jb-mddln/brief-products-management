@@ -10,3 +10,9 @@ Le projet doit comporter trois éléments :
 * Les fichiers SQL pour la base de données.
 * Un projet C# pour l'API.
 * Un projet React pour le front-end.
+<details>
+    <summary>Rendu</summary>
+    <img width="50%" src="rendu 1.png">
+    <img width="50%" src="rendu 2.png">
+    <img width="50%" src="rendu 3.png">
+</details>
