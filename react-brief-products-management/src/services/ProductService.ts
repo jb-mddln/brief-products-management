@@ -11,6 +11,13 @@ export const getProduct = (productId: string) => {
   );
 };
 
+export const addProduct = (newProduct: Product) => {
+  return axios.post<Product>(
+    `${import.meta.env.VITE_API_BASE_URL}/products`,
+    newProduct
+  );
+};
+
 export const deleteProduct = (productId: number) => {
   return axios.delete(
     `${import.meta.env.VITE_API_BASE_URL}/products/${productId}`

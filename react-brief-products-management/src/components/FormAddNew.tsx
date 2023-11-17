@@ -3,6 +3,7 @@ import { Product } from "../models/Product";
 import { Category } from "../models/Category";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { addProduct } from "../services/ProductService";
 
 interface FormAddNewProps {
   type: string | undefined;
@@ -75,6 +76,11 @@ const FormAddNew: React.FC<FormAddNewProps> = ({ type }) => {
   });
 
   const handleSubmit = (values: FormValues) => {
+    if (type === "products") {
+      addProduct(values as Product).then((response) => {
+        console.log("Product added:", response.data);
+      });
+    }
     console.log("Form submitted with values:", values);
   };
 
@@ -89,7 +95,8 @@ const FormAddNew: React.FC<FormAddNewProps> = ({ type }) => {
             <div key={index} className="alert alert-danger">
               <h3 className="alert-title">Erreur</h3>
               <p className="alert-content">
-                {formikPost.errors[fieldName as keyof FormValues]}
+              {String(formikPost.errors[fieldName as keyof FormValues])}
+
               </p>
             </div>
           );
