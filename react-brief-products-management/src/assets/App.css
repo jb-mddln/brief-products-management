@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One');
+
+:root {
+  --txt-color: #010204;
+  --bg-color: #E1E6F9;
+  --primary-color: #7F94E6;
+  --secondary-color: #AAB7EE;
+  --accent-color: #223DAA;
+  --border-radius: 1.5rem;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  background-color: var(--bg-color);
+  color: var(--txt-color);
+  font-size: smaller;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+nav {
+  height: 30px;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 1rem;
+  transition: transform 0.3s ease;
+}
+
+nav li:hover {
+  transform: scale(1.05);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+input {
+  border: 0;
+  appearance: none;
+  position: relative;
+  border-radius: var(--border-radius);
+  padding: 9px 12px;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+}
+
+input:hover {
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+input:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--accent-color);
+}
+
+.container {
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  width: 100%;
+}
+
+table thead tr {
+  background-color: var(--primary-color);
+}
+
+table tr {
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+table tbody td img {
+  height: 50px;
+  padding: 5px;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: var(--primary-color);
+}
+
+table tbody tr:nth-child(odd) {
+  background-color: var(--secondary-color);
+}
+
+table svg {
+  padding: .625em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+table svg:hover {
+  transform: scale(1.1);
+}
+
+table.round-corners {
+  border-collapse: separate;
+  border-spacing: 1px;
+}
+
+table.round-corners th, table.round-corners td {
+  padding: 15px;
+  text-align: center;
+  border: 0;
+  box-shadow: 0 0 0 1px var(--bg-color);
+}
+
+.table.round-corners tbody tr:hover th, .table.round-corners tbody tr:hover td {
+  background: #96acff;
+  transition: background 1.3s ease;
+}
+
+.table.round-corners thead tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.table.round-corners thead tr:last-child th:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.table.round-corners thead tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.table.round-corners thead tr:last-child th:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.table.round-corners tbody tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+}
+
+.table.round-corners tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.table.round-corners tbody tr:first-child td:last-child {
+  border-top-right-radius: 10px;
+}
+
+.table.round-corners tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+button {
+  font-family: 'Fjalla One', sans-serif;
+  border: 0;
+  background-color: var(--secondary-color);
+  color: var(--bg-color);
+  border-radius: var(--border-radius);
+  padding: 0.8em 1.2em 0.8em 1em;
+  transition: all ease-in 0.2s;
+  cursor: pointer;
+}
+
+button span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+ }
+ 
+ button:hover {
+  box-shadow: 0 0 0 2px var(--accent-color);
+ }
+
+ .card {
+  --main-color: #000;
+  --bg-color: #fff;
+  position: relative;
+  padding: 20px;
+  width: 320px;
+  background: var(--bg-color);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-back svg, .card-menu svg {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card-back svg:hover,
+.card-menu svg:hover {
+  transform: scale(1.1);
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-img {
+  width: 170px;
+  height: 170px;
+  background: linear-gradient(90deg, #FFF8F7, #F0F7DF);
+  border-radius: 100%;
+  margin-inline: auto;
+}
+
+.card-img img {
+  height: 150px;
+  padding: 5px;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.card-subtitle {
+  letter-spacing: 0.5px;
+}
+
+.card-price {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.card-stock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  padding: 5px;
+  background: #F7F7F7;
+  border-radius: 50px;
+}
+
+.card-stock-txt {
+  font-weight: 700;
+  font-size: 22px;
+}
