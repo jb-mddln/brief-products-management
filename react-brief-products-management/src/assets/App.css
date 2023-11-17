@@ -192,7 +192,7 @@ table.round-corners th, table.round-corners td {
 button {
   font-family: 'Fjalla One', sans-serif;
   border: 0;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: var(--bg-color);
   border-radius: var(--border-radius);
   padding: 0.8em 1.2em 0.8em 1em;
